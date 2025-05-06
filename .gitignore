@@ -38,3 +38,19 @@
 data/flickr30k
 datasets/
 backups/
+
+# Ignore checkpoints
+checkpoints/
+*.pt
+*.pth
+
+# Ignore tokenizer model
+data/tokenizer/spm.model
+data/tokenizer/spm.vocab
+
+# Ignore pycache files
+__pycache__/
+*.pyc
+
+# Ignore OS generated files
+.DS_Store
