@@ -33,6 +33,9 @@
 *.h5
 *.npy
 *.npz
+*.txt
+*.model
+
 
 
 # Ignore OS generated files
