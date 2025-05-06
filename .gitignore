@@ -34,11 +34,27 @@
 *.npy
 *.npz
 
-# Ignore large folders
-data/flickr30k/images/
-data/tokenizer/
-checkpoints/
-__pycache__/
 
 # Ignore OS generated files
 .DS_Store
+
+# Ignore model checkpoints
+checkpoints/
+
+# Ignore dataset files
+data/flickr30k/
+data/tokenizer/captions.txt
+data/tokenizer/spm.model
+data/tokenizer/spm.vocab
+
+# Ignore image files used for inference
+inference/*.jpg
+inference/*.jpeg
+inference/*.png
+
+# Ignore compiled Python files
+__pycache__/
+*.pyc
+
+# Optional: ignore large sample scripts if not needed
+script_Sample.py
