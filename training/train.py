@@ -50,28 +50,30 @@ def evaluate(model, dataloader, criterion, device):
 def main():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    # Load original dataset (only split available is 'test')
+    # Load full dataset from Hugging Face
     full_data = load_dataset("nlphuji/flickr30k", split="test")
 
-    # Split into train (80%), val (10%), test (10%)
-# 80% train, 10% val, 10% test
-    train_size = int(0.8 * len(raw_dataset))
-    val_size = int(0.1 * len(raw_dataset))
-    test_size = len(raw_dataset) - train_size - val_size
+    # Split into train/val/test (80/10/10)
+    train_size = int(0.8 * len(full_data))
+    val_size   = int(0.1 * len(full_data))
+    test_size  = len(full_data) - train_size - val_size
 
-    train_split, val_split, test_split = random_split(
-        raw_dataset, [train_size, val_size, test_size],
+    train_data, val_data, test_data = random_split(
+        full_data,
+        [train_size, val_size, test_size],
         generator=torch.Generator().manual_seed(42)
     )
 
-    # Wrap into Flickr30kDataset
-    train_dataset = Flickr30kDataset(dataset_split=train_split)
-    val_dataset = Flickr30kDataset(dataset_split=val_split)
+    # Dataset wrapping
+    train_dataset = Flickr30kDataset(dataset_split=train_data)
+    val_dataset   = Flickr30kDataset(dataset_split=val_data)
+    test_dataset  = Flickr30kDataset(dataset_split=test_data)
 
-    train_loader = DataLoader(train_dataset, batch_size=8, shuffle=True)
-    val_loader = DataLoader(val_dataset, batch_size=8)
+    # Data loaders
+    train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
+    val_loader   = DataLoader(val_dataset, batch_size=32)
 
-    # Initialize model
+    # Model setup
     vocab_size = train_dataset.tokenizer.vocab_size
     model = CaptioningModel(vocab_size=vocab_size).to(device)
 
@@ -82,14 +84,7 @@ def main():
     for epoch in range(1, 21):
         print(f"\nEpoch {epoch}")
         train_loss = train(model, train_loader, optimizer, criterion, device)
-        val_loss = evaluate(model, val_loader, criterion, device)
-
-        print(f"Train Loss: {train_loss:.4f}")
-        print(f"Val Loss:   {val_loss:.4f}")
-
-        # Save checkpoint
-        os.makedirs("checkpoints", exist_ok=True)
-        torch.save(model.state_dict(), f"checkpoints/caption_model_epoch{epoch}.pt")
+        val_loss   = evaluate(model, val_loader, criterion, device)
 
 if __name__ == "__main__":
     main()

@@ -1,0 +1,40 @@
+# Ignore all files larger than 100MB
+*.log
+*.tmp
+*.bak
+*.swp
+*.old
+*.orig
+
+# Ignore large files and folders
+*.zip
+*.tar.gz
+*.rar
+*.7z
+*.iso
+*.bin
+*.exe
+*.dll
+
+# Ignore large media files
+*.mp4
+*.mkv
+*.avi
+*.mov
+*.mp3
+*.wav
+*.flac
+
+# Ignore large dataset files
+*.csv
+*.tsv
+*.json
+*.xml
+*.h5
+*.npy
+*.npz
+
+# Ignore large folders
+data/flickr30k
+datasets/
+backups/
