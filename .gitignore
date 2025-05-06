@@ -35,22 +35,10 @@
 *.npz
 
 # Ignore large folders
-data/flickr30k
-datasets/
-backups/
-
-# Ignore checkpoints
+data/flickr30k/images/
+data/tokenizer/
 checkpoints/
-*.pt
-*.pth
-
-# Ignore tokenizer model
-data/tokenizer/spm.model
-data/tokenizer/spm.vocab
-
-# Ignore pycache files
 __pycache__/
-*.pyc
 
 # Ignore OS generated files
 .DS_Store
