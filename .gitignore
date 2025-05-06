@@ -61,3 +61,5 @@ __pycache__/
 
 # Optional: ignore large sample scripts if not needed
 script_Sample.py
+checkpoints/
+checkpoints/
