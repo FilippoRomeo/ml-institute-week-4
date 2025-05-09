@@ -19,7 +19,7 @@ Tested on **Ubuntu 22.04** with:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/image_captioning_transformer.git
+git clone https://github.com/FilippoRomeo/ml-institute-week-4.git
 cd image_captioning_transformer
 ```
 
