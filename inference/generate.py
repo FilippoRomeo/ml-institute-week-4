@@ -43,7 +43,7 @@ def generate_caption(model, image_tensor, tokenizer, image_patcher, max_len=30, 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--image", type=str, required=True, help="Path to input image")
-    parser.add_argument("--checkpoint", type=str, default="checkpoints/caption_model_epoch5.pt")
+    parser.add_argument("--checkpoint", type=str, default="checkpoints/caption_model_epoch2.pt")
     args = parser.parse_args()
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")

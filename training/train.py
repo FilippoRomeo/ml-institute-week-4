@@ -81,10 +81,19 @@ def main():
     pad_id = train_dataset.tokenizer.pad_id
     criterion = nn.CrossEntropyLoss(ignore_index=pad_id)
 
+# Inside your training loop (after evaluating)
     for epoch in range(1, 21):
         print(f"\nEpoch {epoch}")
         train_loss = train(model, train_loader, optimizer, criterion, device)
         val_loss   = evaluate(model, val_loader, criterion, device)
+
+        # Save checkpoint
+        os.makedirs("checkpoints", exist_ok=True)
+        checkpoint_path = f"checkpoints/caption_model_epoch{epoch}.pt"
+        torch.save(model.state_dict(), checkpoint_path)
+        print(f"✅ Saved checkpoint to {checkpoint_path}")
+        print(f"Train Loss: {train_loss:.4f}, Val Loss: {val_loss:.4f}")
+
 
 if __name__ == "__main__":
     main()
